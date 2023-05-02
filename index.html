@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Snake Game</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<canvas id="canvas"></canvas>
+	<script type="module">
+
+		import Game from "./scripts/Game.js"
+
+		// Instância um objeto da classe Game
+		const game = new Game()
+
+		// Inicializa o jogo
+		game.init()
+
+		// Definir limitador de FPS
+		const fps = 20
+		const interval = 1000 / fps
+		let lastRenderTime = 0
+
+		// Loop principal
+		function loop(currentTime) {
+
+			// Limitar FPS
+			if (currentTime - lastRenderTime < interval) {
+				requestAnimationFrame(loop)
+				return
+			}
+
+			lastRenderTime = currentTime
+
+			// Desenha o jogo
+			game.draw()
+			// Atualiza o jogo
+			game.update()
+			// Calcula colisão
+			game.hasCollision()
+
+			// Agendar a próxima atualização do jogo
+			requestAnimationFrame(loop)
+		}
+
+		// Iniciar o jogo quando a página carregar
+		window.addEventListener("load", () => {
+			lastRenderTime = performance.now()
+			requestAnimationFrame(loop)
+		})
+
+	</script>
+</body>
+
+</html>
