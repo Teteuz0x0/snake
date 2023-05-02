@@ -81,7 +81,7 @@ class Game {
     // Escuta o input do player
     inputListener(keyPressed) {
         // Caso presionar Enter
-        if (keyPressed == "Enter") {
+        if (keyPressed == "Enter" && this.gameOver()) {
             // Reinicie o jogo
             this.#scene.remove(this.#snake)
             this.#inputListener.unsubscribe(this.#snake)
