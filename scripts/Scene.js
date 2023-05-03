@@ -26,10 +26,8 @@ class Scene {
     }
 
     // Insere novo objeto no array
-    add(type, obj) {
-        // Acidciona o tipo do do objeto
-        obj.type = type
-        // Adiciona o obejeto a cena
+    add(obj) {
+        // Adiciona o obejeto ao gerenciador de cena
         this.#objects.push(obj)
     }
 

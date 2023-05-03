@@ -36,8 +36,8 @@ class Game {
         // Instância um objeto da classe Scene
         this.#scene = new Scene()
         // Adiciona objetos a cena
-        this.#scene.add("FOOD", this.#food)
-        this.#scene.add("PLAYER", this.#snake)
+        this.#scene.add(this.#food)
+        this.#scene.add(this.#snake)
 
         // Instância um objeto da classe InputListener
         this.#inputListener = new InputListener()
@@ -87,7 +87,7 @@ class Game {
             this.#scene.remove(this.#snake)
             this.#inputListener.unsubscribe(this.#snake)
             this.#snake = new Snake(renderer.getCanvasWidth() / 2 - Config.pixel / 2, renderer.getCanvasHeight() / 2 - Config.pixel / 2, "green")
-            this.#scene.add("PLAYER", this.#snake)
+            this.#scene.add(this.#snake)
             this.#inputListener.subscribe(this.#snake)
         }
     }
