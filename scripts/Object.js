@@ -71,3 +71,5 @@ class Object {
         throw new Error(`Abstract method "onCollision(obj" not defined in class child ${this.constructor.name}`);
     }
 }
+
+export default Object
