@@ -12,8 +12,9 @@
 
 import Config from "./Config.js"
 import Sprite from "./Sprite.js"
+import Object from "./Object.js"
 
-class Food {
+class Food extends Object {
 
     // Atributos privados
     #food       // Sprite da comida
@@ -21,12 +22,14 @@ class Food {
     // Métodos públicos
     // Construtor da classe Food
     constructor(color) {
-        this.#food = new Sprite(this.#getcoordinates(), this.#getcoordinates(), Config.pixel, Config.pixel, color)
+        super()
+        this.#food = new Sprite(Config.pixel, Config.pixel, color)
+        this.type = "FOOD"
     }
 
     // Método responsável por desenhar a sprite da comida na tela 
     draw() {
-        this.#food.draw()
+        this.#food.draw(this.#getcoordinates(), this.#getcoordinates())
     }
 
     // Método de atualização da comida
@@ -37,13 +40,9 @@ class Food {
     // Método responsável pela resolução da colisão da "cobrinha"
     onCollision(obj) {
         if (obj.type == "PLAYER") {
-            this.#food.MoveTo(this.#getcoordinates(), this.#getcoordinates())
+            this.MoveTo(this.#getcoordinates(), this.#getcoordinates())
         }
     }
-
-    // Métodos getters
-    getX() { return this.#food.getX() }
-    getY() { return this.#food.getY() }
 
     // Métodos privados
     // Gera as coordenadas da comida
