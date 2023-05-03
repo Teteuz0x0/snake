@@ -4,8 +4,9 @@
 // Criação:     20 Abr 2023
 // Atualização: 21 Abr 2023
 //
-// Descrição:   Define e exporta a classe Sprite. Classe que cria 
-//              as sprites do jogo
+// Descrição:   Define e exporta a classe Sprite.
+//
+//              Classe que cria as sprites do jogo.
 //
 **********************************************************************************/
 

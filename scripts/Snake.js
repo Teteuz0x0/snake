@@ -4,7 +4,9 @@
 // Criação:     22 Abr 2023
 // Atualização: 24 Abr 2023
 //
-// Descrição:   Define e exporta a classe Snake. Classe para representar o jogador
+// Descrição:   Define e exporta a classe Snake. 
+//
+//               Classe para representar o jogador.
 //
 **********************************************************************************/
 

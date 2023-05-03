@@ -4,11 +4,12 @@
 // Criação:     25 Abr 2023
 // Atualização: *
 //
-// Descrição:   Define e exporta a classe InputListener, Classe que pega os
-//              inputs do player, e para tal tarefa  utiliza do desing 
-//              pattern Observer, segue o link para mais infirmações do mesmo:
-//              https://refactoring.guru/pt-br/design-patterns/observer
+// Descrição:   Define e exporta a classe InputListener.
 //
+//              Classe que captura os inputs, e para tal tarefa  utiliza do desing
+//              pattern Observer, segue o link para mais infirmações do mesmo: 
+//              https://refactoring.guru/pt-br/design-patterns/observer
+//              
 **********************************************************************************/
 
 class InputListener {

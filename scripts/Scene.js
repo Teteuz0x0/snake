@@ -4,10 +4,11 @@
 // Criação:     20 Abr 2023
 // Atualização: 22 Abr 2023
 //
-// Descrição:   Define a classe Scene e a exporta. A
-//              Classe Scene, e uma gerenciadora de cena, ela adiciona objetos
+// Descrição:   Define a classe Scene e a exporta.
+//
+//              A classe Scene, e uma gerenciadora de cena, ela adiciona objetos
 //              e chama automaticamnete seus métodos update, draw e onCollision 
-//              (quando há colisão)                
+//              (quando há colisão).              
 //
 **********************************************************************************/
 

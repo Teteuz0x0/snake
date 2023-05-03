@@ -4,9 +4,10 @@
 // Criação:     19 Abr 2023
 // Atualização: 29 Abr 2023
 //
-// Descrição:   Define a classe Renderer e exporta uma instância da mesma. A
-//              Classe Renderer, faz a manipulação direta do elemento canvas, 
-//              desenhando, apagando e escrevendo
+// Descrição:   Define a classe Renderer e exporta uma instância da mesma. 
+//
+//              A classe Renderer, faz a manipulação direta do elemento canvas, 
+//              desenhando, apagando e escrevendo.
 //
 **********************************************************************************/
 

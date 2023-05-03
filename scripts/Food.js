@@ -4,11 +4,11 @@
 // Criação:     21 Abr 2023
 // Atualização: 23 Abr 2023
 //
-// Descrição:   Define e exporta a classe Food, Classe para 
-//              representar a comida da "cobrinha"
+// Descrição:   Define e exporta a classe Food. 
+//
+//              Classe para representar a comida da "cobrinha"
 //
 **********************************************************************************/
-
 
 import Config from "./Config.js"
 import Sprite from "./Sprite.js"

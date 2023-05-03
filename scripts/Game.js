@@ -4,8 +4,9 @@
 // Criação:     26 Abr 2023
 // Atualização: *
 //
-// Descrição:   Define e exporta a classe Game, Classe que representa
-//              o jogo em si
+// Descrição:   Define e exporta a classe Game. 
+//
+//              Classe que representa o jogo em si.
 //
 **********************************************************************************/
 
