@@ -6,22 +6,21 @@
 //
 // Descrição:   Define e exporta a classe Snake. 
 //
-//               Classe para representar o jogador.
+//              Classe para representar o jogador.
 //
 **********************************************************************************/
 
 import Config from "./Config.js"
 import Sprite from "./Sprite.js"
 import renderer from "./Renderer.js"
+import Object from "./Object.js"
 
-class Snake {
+class Snake extends Object {
 
     // Atributos privados
-    #snake                       // Corpo da "cobrinha"
-    #color                       // Cor da "cobrinha"
+    #sprite                      // Sprite da "cobrinha"
+    #coordinates                 // Array de coordenadas
     #direction                   // Direção da "cobrinha"
-    #snakeX                      // Coordenada x da cabeça da "cobrinha"
-    #snakeY                      // Coordenada y da cabeça da "cobrinha"
     #collisionWithFood           // Guarda o estado de colisão com a comida
     #score                       // Pontuação do jogador
     #gameOver                    // Guarda o estado de perda de jogo
@@ -29,18 +28,21 @@ class Snake {
     // Métodos públicos
     // Construtor da classe Snake
     constructor(x, y, color) {
-        this.#snake = []
-        this.#color = color
+        super()
         this.#score = 0
         this.#gameOver = false
-        this.#snake[0] = new Sprite(x, y, Config.pixel, Config.pixel, color)
+        this.#sprite = new Sprite(Config.pixel, Config.pixel, color)
         this.#collisionWithFood = false
+        this.#coordinates = []
+        this.#coordinates.unshift({ x, y })
+        this.MoveTo(x, y)
+        this.type = "PLAYER"
     }
 
     // Método responsável por desenhar a sprite da "cobrinha" na tela 
     draw() {
-        this.#snake.forEach(sprite => {
-            sprite.draw()
+        this.#coordinates.forEach(coordinate => {
+            this.#sprite.draw(coordinate.x, coordinate.y)
         })
     }
 
@@ -53,29 +55,26 @@ class Snake {
             this.#gameOver = true
 
         // Caso 2: Colidir com uma parte de si mesmo
-        for (let i = 1; i < this.#snake.length; i++) {
-            if (this.getX() == this.#snake[i].getX() && this.getY() == this.#snake[i].getY())
+        for (let i = 1; i < this.#coordinates.length; i++) {
+            if (this.getX() == this.#coordinates[i].x && this.getY() == this.#coordinates[i].y)
                 this.#gameOver = true
         }
 
         // Se o jogador não tiver perdido
         if (!this.#gameOver) {
-            // Recuperando os valores da posição 0 dos array de sprites
-            this.#snakeX = this.#snake[0].getX()
-            this.#snakeY = this.#snake[0].getY()
 
             // Movimentação
-            if (this.#direction == "right") this.#snakeX += Config.pixel
-            if (this.#direction == "left") this.#snakeX -= Config.pixel
-            if (this.#direction == "up") this.#snakeY -= Config.pixel
-            if (this.#direction == "down") this.#snakeY += Config.pixel
+            if (this.#direction == "right") this.Translate(Config.pixel, 0)
+            if (this.#direction == "left") this.Translate(-Config.pixel, 0)
+            if (this.#direction == "up") this.Translate(0, -Config.pixel)
+            if (this.#direction == "down") this.Translate(0, Config.pixel)
 
-            // Se não ouver colisão com a comida será removido o último elemento do array #snake
+            // Se não ouver colisão com a comida será removido o último elemento do array #coordinates
             if (!this.#collisionWithFood)
-                this.#pop()
+                this.#coordinates.pop()
 
-            // Adiciona nova sprite ao ínicio do array #snake
-            this.#unshift()
+            // Adiciona nova coordenada ao ínicio do array #coordinates
+            this.#coordinates.unshift({ x: this.getX(), y: this.getY() })
 
             // Seta a colisão com a comida para falso
             this.#collisionWithFood = false
@@ -115,21 +114,8 @@ class Snake {
     }
 
     // Métodos getters
-    getX() { return this.#snakeX }
-    getY() { return this.#snakeY }
     getScore() { return this.#score }
     getGameOver() { return this.#gameOver }
-
-    // Métodos privados
-    // Remove o último elemento do array de sprites
-    #pop() {
-        this.#snake.pop()
-    }
-
-    // Adiciona sprite no ínicio do array
-    #unshift() {
-        this.#snake.unshift(new Sprite(this.#snakeX, this.#snakeY, Config.pixel, Config.pixel, this.#color))
-    }
 }
 
 export default Snake

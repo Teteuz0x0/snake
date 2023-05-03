@@ -17,19 +17,20 @@ import Object from "./Object.js"
 class Food extends Object {
 
     // Atributos privados
-    #food       // Sprite da comida
+    #sprite       // Sprite da comida
 
     // Métodos públicos
     // Construtor da classe Food
     constructor(color) {
         super()
-        this.#food = new Sprite(Config.pixel, Config.pixel, color)
+        this.#sprite = new Sprite(Config.pixel, Config.pixel, color)
+        this.MoveTo(this.#getcoordinates(), this.#getcoordinates())
         this.type = "FOOD"
     }
 
     // Método responsável por desenhar a sprite da comida na tela 
     draw() {
-        this.#food.draw(this.#getcoordinates(), this.#getcoordinates())
+        this.#sprite.draw(this.getX(), this.getY())
     }
 
     // Método de atualização da comida
