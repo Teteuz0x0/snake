@@ -28,10 +28,10 @@ class Game {
     // Métodos públicos
     // inicializa o jogo
     init() {
-        // Instância um objeto da classe Food
-        this.#food = new Food("red")
         // Instância um objeto da classe Snake
         this.#snake = new Snake(renderer.getCanvasWidth() / 2 - Config.pixel / 2, renderer.getCanvasHeight() / 2 - Config.pixel / 2, "green")
+        // Instância um objeto da classe Food
+        this.#food = new Food("red", this.#snake)
 
         // Instância um objeto da classe Scene
         this.#scene = new Scene()
@@ -89,6 +89,7 @@ class Game {
             this.#snake = new Snake(renderer.getCanvasWidth() / 2 - Config.pixel / 2, renderer.getCanvasHeight() / 2 - Config.pixel / 2, "green")
             this.#scene.add(this.#snake)
             this.#inputListener.subscribe(this.#snake)
+            this.#food.generateCoordinates()
         }
     }
 

@@ -18,13 +18,15 @@ class Food extends Object {
 
     // Atributos privados
     #sprite       // Sprite da comida
+    #snake        // Jogador
 
     // Métodos públicos
     // Construtor da classe Food
-    constructor(color) {
+    constructor(color, snake) {
         super()
         this.#sprite = new Sprite(Config.pixel, Config.pixel, color)
-        this.MoveTo(this.#getcoordinates(), this.#getcoordinates())
+        this.#snake = snake
+        this.generateCoordinates()
         this.type = "FOOD"
     }
 
@@ -41,23 +43,62 @@ class Food extends Object {
     // Método responsável pela resolução da colisão da "cobrinha"
     onCollision(obj) {
         if (obj.type == "PLAYER") {
-            this.MoveTo(this.#getcoordinates(), this.#getcoordinates())
+            this.generateCoordinates()
         }
     }
 
-    // Métodos privados
     // Gera as coordenadas da comida
-    #getcoordinates() {
-        let coordinates = []
+    generateCoordinates() {
+        // Recupera as coordenadas da cobra
+        const snakeCoordinates = this.#snake.getcoordinates();
 
-        for (let i = 0; i <= Config.amountOfCanvasPixels; i++)
-            coordinates[i] = Config.pixel / 2 + (i - 1) * Config.pixel
+        // Declara arrays para armazenar as coordenadas possíveis para a comida
+        const potentialCoordinatesX = [];
+        const potentialCoordinatesY = [];
 
-        coordinates.shift()
-        const coord = coordinates[Math.floor(Math.random() * coordinates.length)]
+        // Loop para calcular as coordenadas possíveis para X e Y
+        for (let i = 1; i <= Config.amountOfCanvasPixels; i++) {
 
-        return coord
+            // Calcula a coordenada atual para X e Y
+            const coordinate = Config.pixel / 2 + (i - 1) * Config.pixel;
+
+            // Variáveis booleanas para verificar se a coordenada atual é válida para X e Y
+            let validX = true;
+            let validY = true;
+
+            // Loop para verificar se a coordenada atual sobrepõe a cobra para X e Y
+            for (const snakeCoordinate of snakeCoordinates) {
+
+                // Se a coordenada atual for igual a uma coordenada da cobra para X
+                if (coordinate === snakeCoordinate.x) {
+                    validX = false;
+                }
+
+                // Se a coordenada atual for igual a uma coordenada da cobra para Y
+                if (coordinate === snakeCoordinate.y) {
+                    validY = false;
+                }
+            }
+
+            // Se a coordenada atual for válida para X, adiciona-a ao array de coordenadas possíveis para X
+            if (validX) {
+                potentialCoordinatesX.push(coordinate);
+            }
+
+            // Se a coordenada atual for válida para Y, adiciona-a ao array de coordenadas possíveis para Y
+            if (validY) {
+                potentialCoordinatesY.push(coordinate);
+            }
+        }
+
+        // Seleciona aleatoriamente uma coordenada para X e uma coordenada para Y a partir das coordenadas possíveis
+        const randomX = potentialCoordinatesX[Math.floor(Math.random() * potentialCoordinatesX.length)];
+        const randomY = potentialCoordinatesY[Math.floor(Math.random() * potentialCoordinatesY.length)];
+
+        // Move a comida para as coordenadas selecionadas
+        this.MoveTo(randomX, randomY);
     }
+
 }
 
 export default Food

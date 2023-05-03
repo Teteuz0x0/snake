@@ -116,6 +116,7 @@ class Snake extends Object {
     // Métodos getters
     getScore() { return this.#score }
     getGameOver() { return this.#gameOver }
+    getcoordinates() { return this.#coordinates }
 }
 
 export default Snake
