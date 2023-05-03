@@ -20,12 +20,15 @@
 
 class Object {
 
+    // Atributos públicos
+    type            // Tipo do objeto
+
     // Atributos privados
-    #x       // Coordendada x
-    #y       // Coordenada y
+    #x              // Coordendada x
+    #y              // Coordenada y
 
     // Métodos públicos 
-    // Abtratos
+    // Métodos não abstratos - com uma implementação padrão
     // Construtor da classe Object
     constructor() {
         if (this.constructor == Object) {
@@ -33,22 +36,6 @@ class Object {
         }
     }
 
-    // Método de atualização
-    update() {
-        throw new Error(`Abstract method "update" not defined in class child ${this.constructor.name}`);
-    }
-
-    // Método de desenho
-    draw() {
-        throw new Error(`Abstract method "draw" not defined in class child ${this.constructor.name}`);
-    }
-
-    // Método de resolução de colisão
-    onCollision(obj) {
-        throw new Error(`Abstract method "onCollision(obj" not defined in class child ${this.constructor.name}`);
-    }
-
-    // Métodos não abstratos - com uma implementação padrão
     // move o objeto por (deltaX, deltaY)
     Translate(dx, dy) {
         this.#x += dx
@@ -67,4 +54,20 @@ class Object {
 
     // Retorna a coordenada y do objeto
     getY() { return this.#y }
+
+    // Métodos abtratos - devem ser implementados nas classes filhas
+    // Método de atualização
+    update() {
+        throw new Error(`Abstract method "update" not defined in class child ${this.constructor.name}`);
+    }
+
+    // Método de desenho
+    draw() {
+        throw new Error(`Abstract method "draw" not defined in class child ${this.constructor.name}`);
+    }
+
+    // Método de resolução de colisão
+    onCollision(obj) {
+        throw new Error(`Abstract method "onCollision(obj" not defined in class child ${this.constructor.name}`);
+    }
 }
