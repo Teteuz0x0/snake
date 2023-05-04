@@ -24,6 +24,8 @@ class Game {
     #food                       // Comida
     #scene                      // Gerenciador de cena
     #inputListener              // Ecuta os input do player
+    #gameOver                   // Som de game over
+    #gameOverAudioPlayed        // guara o estado do áudio de gme over
 
     // Métodos públicos
     // inicializa o jogo
@@ -45,6 +47,11 @@ class Game {
         this.#inputListener.subscribe(this.#snake)
         // Increve o jogo como observer
         this.#inputListener.subscribe(this)
+
+        // Carrega o som de game over
+        this.#gameOver = new Audio("..\\resources\\game-over.mp3")
+        // Seta o estao do áudio game over para não tocado
+        this.#gameOverAudioPlayed = false
     }
 
     // Desenha o jogo
@@ -67,6 +74,12 @@ class Game {
     // Atualiza o jogo
     update() {
         this.#scene.update()
+
+        // Tocar som de game over, cajo o player tenha perdido
+        if (this.gameOver() && !this.#gameOverAudioPlayed) {
+            this.#gameOver.play()
+            this.#gameOverAudioPlayed = true
+        }
     }
 
     // Resolve as colisões do jogo
@@ -81,7 +94,7 @@ class Game {
 
     // Escuta o input do player
     inputListener(keyPressed) {
-        // Caso presionar Enter
+        // Caso presionar Enter em estado de game over
         if (keyPressed == "Enter" && this.gameOver()) {
             // Reinicie o jogo
             this.#scene.remove(this.#snake)
@@ -90,6 +103,7 @@ class Game {
             this.#scene.add(this.#snake)
             this.#inputListener.subscribe(this.#snake)
             this.#food.generateCoordinates()
+            this.#gameOverAudioPlayed = false
         }
     }
 

@@ -18,12 +18,14 @@ import Object from "./Object.js"
 class Snake extends Object {
 
     // Atributos privados
-    #sprite                      // Sprite da "cobrinha"
-    #coordinates                 // Array de coordenadas
-    #direction                   // Direção da "cobrinha"
-    #collisionWithFood           // Guarda o estado de colisão com a comida
-    #score                       // Pontuação do jogador
-    #gameOver                    // Guarda o estado de perda de jogo
+    #sprite                                     // Sprite da "cobrinha"
+    #coordinates                                // Array de coordenadas
+    #direction                                  // Direção da "cobrinha"
+    #collisionWithFood                          // Guarda o estado de colisão com a comida
+    #score                                      // Pontuação do jogador
+    #gameOver                                   // Guarda o estado de perda de jogo
+    #fruitCollected                             // Som da fruta sendo coleta
+    #fruitCollectedIsMultipleOf10               // Som da fruta sendo coleta se ela for múltiplo de 10
 
     // Métodos públicos
     // Construtor da classe Snake
@@ -36,6 +38,8 @@ class Snake extends Object {
         this.#coordinates = []
         this.#coordinates.unshift({ x, y })
         this.MoveTo(x, y)
+        this.#fruitCollected = new Audio("..\\resources\\fruit-collected.mp3")
+        this.#fruitCollectedIsMultipleOf10 = new Audio("..\\resources\\fruit-collected-is-multiple-of-10.mp3")
         this.type = "PLAYER"
     }
 
@@ -88,6 +92,8 @@ class Snake extends Object {
             this.#collisionWithFood = true
             // Incrementa a pontuação
             this.#score++
+            // Toca o som da fruta sendo coletada
+            (this.#score % 10 == 0) ? this.#fruitCollectedIsMultipleOf10.play() : this.#fruitCollected.play()
         }
     }
 
